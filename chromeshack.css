@@ -128,8 +128,6 @@ body.shack_sfw div.oneline6 span.oneline_body { color: #666 !important; }
 body.shack_sfw div.oneline7 span.oneline_body { color: #777 !important; } 
 body.shack_sfw div.oneline8 span.oneline_body { color: #888 !important; } 
 body.shack_sfw div.oneline9 span.oneline_body { color: #999 !important; } 
-body.shack_sfw div.threads ul ul li { background-image: url(data:image/gif;base64,R0lGODlhDAAyALMAAAAAACgoKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAAALAAAAAAMADIAAAQ8MIBJK5DW4kw3v18XTh5XZkGqruoIjqfmxhUtwnOO76FN6j3gx%2FcK8oZCUxK1lB2VT2bUaawip7VmdhQBADs%3D) !important; } 
-body.shack_sfw div.threads ul ul li.last{ background-image: url(data:image/gif;base64,R0lGODlhDAAJAIAAACgoKAAAACH5BAEAAAEALAAAAAAMAAkAAAIRRI4ZpsqNHlwz1iNhbqD73xUAOw%3D%3D) !important } 
 body.shack_sfw .postnumber a:link, body.shack_sfw .postnumber a:visited, body.shack_sfw .postnumber a:active, body.shack_sfw .postnumber a:hover { background-image: url(data:image/gif;base64,R0lGODlhZAAUALMAAAAAAP8A%2F8DAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAEALAAAAABkABQAAARlMMhJq7046827%2F2AojmRpnmiqrqngvi%2FbAXRdy5yA6XgGYL%2FeLgDj8YSWny0YRFaOT2cSKI0WJdCq0iZpVrGXrPbi%2FRJdWPH3FqCZh%2Bp3ey4Px%2BXuun7P7%2Fv%2FgIGCg4SFhociEQAAOw%3D%3D) !important; } 
 body.shack_sfw .refresh a:link, body.shack_sfw .refresh a:visited, body.shack_sfw .refresh a:active, body.shack_sfw .refresh a:hover{ background-image: url(data:image/gif;base64,R0lGODlhZAAUALMAAAAAAP8A%2F8DAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAEALAAAAABkABQAAARWMMhJq7046827%2F2AojmRpnmiqrqvgsiMgw6Ew2bQHTHvO4TffpscTaoASpLFClDSXFKBrCmXyZLNq9PbSUohYb0UqtjrL6LR6zW673%2FC4fE6v2%2B%2F4dwQAOw%3D%3D) !important; } 
 body.shack_sfw div.treecollapse { background-color: transparent !important; } 
@@ -155,26 +153,56 @@ body.shack_sfw td.date {color: #000 !important; }
 body.shack_sfw tr.odd {background-color: #eee !important; } 
 body.shack_sfw div.interiorcontent th, body.shack_sfw div.interiorform label { color: #000 !important; } 
 
-/* new comment marker */
-li.newcommenthighlighter {
-        background-image: url(data:image/gif;base64,R0lGODlhDAAyAKIAAAAAAP///wCLlwttdh1FSf///wAAAAAAACH5BAEAAAUALAAAAAAMADIAAAM6KLDcoM7ByCZ9t+ZlaY9CKI4D8Ukbtp0Nq62py8U0bGeyitf7feVA3k/oIYKMKF9ReWQme9Chs5VKAAA7) !important;
+/* old comment marker whiteshack / background friendly - comment line's background is now transparent and lines are medium gray */
+div.threads ul ul li {
+    background-image: url(data:image/gif;base64,R0lGODlhDAAyAIABAICAgP///yH5BAEKAAEALAAAAAAMADIAAAI3RI4ZpsqNHlwz1iNhbqD7j13UtTlimaAWebbsW6khPMlj7OK0ltc9v+P8hEFTMTU06pa+46pSAAA7)  !important;
 }
 
-li.newcommenthighlighter_last {
-        background-image: url(data:image/gif;base64,R0lGODlhDAAJAKIAAAAAAP///wCLlwttdh1FSf///wAAAAAAACH5BAEAAAUALAAAAAAMAAkAAAMUKLDcoM7ByCZ9t+ZlaY9CKI4DkQAAOw%3D%3D) !important;
+div.threads ul ul li.last {
+    background-image: url(data:image/gif;base64,R0lGODlhDAAJAIABAICAgP///yH5BAEKAAEALAAAAAAMAAkAAAIRRI4ZpsqNHlwz1iNhbqD7fxQAOw==) !important;
+}
+
+div.threads ul ul {
+    background-image: url(data:image/gif;base64,R0lGODlhAQACAIABAICAgP///yH5BAEKAAEALAAAAAABAAIAAAICBAoAOw==) !important;
+}
+
+
+/* new comment marker */
+div.threads ul ul li.newcommenthighlighter {
+    background-image: url(data:image/gif;base64,R0lGODlhDAAyAIABAACLl////yH5BAEKAAEALAAAAAAMADIAAAI3RI4ZpsqNHlwz1iNhbqD7j13UtTlimaAWebbsW6khPMlj7OK0ltc9v+P8hEFTMTU06pa+46pSAAA7) !important;
+}
+
+div.threads ul ul li.newcommenthighlighter_last {
+    background-image: url(data:image/gif;base64,R0lGODlhDAAJAIABAACLl////yH5BAEKAAEALAAAAAAMAAkAAAIRRI4ZpsqNHlwz1iNhbqD7fxQAOw==) !important;
 }
 
 div.threads ul ul.newcommenthighlighter {
-        background-image: url(data:image/gif;base64,R0lGODlhAQACAJEAAAAAAP///wCLl////yH5BAEAAAMALAAAAAABAAIAAAIClAoAOw%3D%3D) !important;
-        background-repeat: y-repeat;
+    background-image: url(data:image/gif;base64,R0lGODlhAQACAIABAACLl////yH5BAEKAAEALAAAAAABAAIAAAICBAoAOw==) !important;
+    background-repeat: y-repeat;
 }
 
 .newcommenthighlighter_newrootpost .postnumber a:link, .newcommenthighlighter_newrootpost .postnumber a:visited, .newcommenthighlighter_newrootpost .postnumber a:active, .newcommenthighlighter_newrootpost .postnumber a:hover {
-        background-image: url(data:image/gif;base64,R0lGODlhZAAUAKIAAAAAAP///wC8zACLlwCKluTz9GCemf///yH5BAEAAAcALAAAAABkABQAAANweLrc/jDKSau9OOvNu/9gKI6hYJ4nWRVs26qUMMz0LMBSUdcFHsko2eDme+gMSOSsV3QId8OmQwcdMKULGQFlwzJ0hKRh6WU8a8Tygbq7qk+2tHrNWrrnCiB+at075X50gYOEhYaHiImKi4yNjo8+CQA7) !important;;
+    background-image: url(data:image/gif;base64,R0lGODlhZAAUAKIAAAAAAP///wC8zACLlwCKluTz9GCemf///yH5BAEAAAcALAAAAABkABQAAANweLrc/jDKSau9OOvNu/9gKI6hYJ4nWRVs26qUMMz0LMBSUdcFHsko2eDme+gMSOSsV3QId8OmQwcdMKULGQFlwzJ0hKRh6WU8a8Tygbq7qk+2tHrNWrrnCiB+at075X50gYOEhYaHiImKi4yNjo8+CQA7) !important;;
 }
 span.newcommenthighlighter_bluetext {
-        color: #00BFF3;
+    color: #00BFF3;
 }
+
+/* new reply comment to you marker - red lines*/
+div.threads ul ul li.newcommenthighlighter_tome {
+    background-image: url(data:image/gif;base64,R0lGODlhDAAyAIABAP8AAP///yH5BAEKAAEALAAAAAAMADIAAAI3RI4ZpsqNHlwz1iNhbqD7j13UtTlimaAWebbsW6khPMlj7OK0ltc9v+P8hEFTMTU06pa+46pSAAA7) !important;
+}
+
+div.threads ul ul li.newcommenthighlighter_last_tome {
+    background-image: url(data:image/gif;base64,R0lGODlhDAAJAIABAP8AAP///yH5BAEKAAEALAAAAAAMAAkAAAIRRI4ZpsqNHlwz1iNhbqD7fxQAOw==) !important;
+}
+
+div.threads ul ul.newcommenthighlighter_tome {
+    background-image: url(data:image/gif;base64,R0lGODlhAQACAIABAP8AAP///yH5BAEKAAEALAAAAAABAAIAAAICBAoAOw==) !important;
+    background-repeat: y-repeat;
+}
+
+
 
 .postdate {
     right: 55px !important;
@@ -210,5 +238,23 @@ span.newcommenthighlighter_bluetext {
 	background-image: url(chrome-extension://mcnpepegfcikofcogenpncheiohblnpp/images/wolf3d_health.png);
 }
 
+div#newrepliestoyouform {
+background-color: #222;
+width: 279px;
+border: 2px solid #09F;
+padding: 10px;
+position: absolute;
+top: 27px;
+right: -2px;
+font-size: 11px;
+z-index: 1100;
+}
+
+div#newrepliestoyouform > a{
+	display: block;
+	width: 250px;
+	height: 1.4em;
+	overflow: hidden;
+}
 
 
