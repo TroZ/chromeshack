@@ -8,99 +8,65 @@ settingsLoadedEvent.addHandler(function()
             post_ttl: 1000 * 60 * 60 * 24,
 
             bar_colors: new Array('#00C300' ,'#00C800' ,'#00D100' ,'#00D800' ,'#00DF00' ,'#00E600' ,'#00ED00' ,'#00F500' ,'#00FB00' ,'#00FE00' ,'#2AFF00' ,'#7EFF00' ,'#D4FF00' ,'#FEFF00' ,'#FFFF00' ,'#FFEE00' ,'#FFCF00' ,'#FFAA00' ,'#FF9900' ,'#FF9900' ,'#FF8000' ,'#FF4B00' ,'#FF1A00' ,'#FF0000'),
-            
+			
+			bg_x_pos: 0,
+			rotatestyle: null,
+
             showExpiration: function(item, id, is_root_post)
             {
-            	var style = getSetting("expiration_watcher_style");
-            	
                 if (is_root_post)
                 {
                     var postdate = getDescendentByTagAndClassName(item, "div", "postdate");
                     var expiration_time = ExpirationWatcher.calculateExpirationTime(postdate);
 
-	            	if (style === "Bar")
-	            	{
-	                    var wrap = document.createElement("div");
-	                    wrap.className = "countdown-wrap";
-	
-	                    var value = wrap.appendChild(document.createElement("div"));
-	                    value.className = "countdown-value";
-	
-	                    ExpirationWatcher.updateExpirationTime(expiration_time, wrap, value);
-	                    postdate.parentNode.insertBefore(wrap, postdate);
-	                }
-	                else if (style === "Wolf3d")
-	                {
-	                    var value = document.createElement("div");
-	                    value.className = "countdown-wolf3d";
+                    var now = Date.now();
 
-						// Calculate the amount of time this thread has left 
-		                var now = Date.now();
-        		        var time_left = expiration_time - now;           
-						
-						// Calculate amount of time left and shift background image to display correct cel 
-						var hours_left = time_left / 3600000;
-						if (hours_left <= 1)
-						{
-							value.style.backgroundPosition = "0 -60px";
-						}
-						else if (hours_left <= 4)
-						{
-							value.style.backgroundPosition = "0 -30px";
-						}
-						
-						// Title contains readable time left 
-						value.title = ExpirationWatcher.getExpirationTimeDescription(now, expiration_time);
-	                    
-	                    // Insert div 
-	                    postdate.parentNode.insertBefore(value, postdate);
-	                }
+                    var time_left = expiration_time - now;
+                    var percent = 100;
+                    var color = "#000000";
+                    if (time_left > 0)
+                    {
+                        var total_seconds = Math.round(time_left / 1000);
+                        var total_minutes = Math.floor(total_seconds / 60);
+                        var total_hours = Math.floor(total_minutes / 60);
+
+                        var minutes = total_minutes % 60;
+                        var seconds = total_seconds % 60;
+
+                        var desc = "Expires in " + total_hours + " hours, " + minutes + " minutes, and " + seconds + " seconds.";
+                        var percent = 100 - Math.floor(100 * time_left / ExpirationWatcher.post_ttl);
+                        color = ExpirationWatcher.bar_colors[23 - total_hours];
+                    }
+                    else
+                    {
+                        var desc = "Expired.";
+                    }
+
+                    var wrap = document.createElement("div");
+                    wrap.className = "countdown-wrap";
+                    wrap.title = desc;
+
+                    var value = wrap.appendChild(document.createElement("div"));
+                    value.className = "countdown-value";
+                    value.style.backgroundColor = color;
+                    value.style.width = percent + "%";
+
+                    postdate.parentNode.insertBefore(wrap, postdate);
+					
+					if(ExpirationWatcher.rotatestyle == null){
+						//*  toggle comment, switch line start between /* and //* (one character change) to toggle two versions of the code
+						ExpirationWatcher.rotatestyle = 1;
+						/*/
+						ExpirationWatcher.rotatestyle = document.createElement('style');
+						ExpirationWatcher.rotatestyle.setAttribute('type','text/CSS');
+						ExpirationWatcher.rotatestyle.textContent = ".countdown-value { background-position: 0px 0px };";
+						document.getElementsByTagName('head')[0].appendChild(ExpirationWatcher.rotatestyle);
+						//*/
+						setInterval(ExpirationWatcher.rotateBackground, 250);
+					}
+
                 }
 
-            },
-
-            updateExpirationTime: function(expiration_time, wrap, value)
-            {
-                var now = Date.now();
-
-                var time_left = expiration_time - now;
-                var percent = 100;
-                var color = ExpirationWatcher.bar_colors[23];
-            
-			    var desc = ExpirationWatcher.getExpirationTimeDescription(now, expiration_time); 
-			    
-                if (time_left > 0)
-                {
-                    percent = 100 - Math.floor(100 * time_left / ExpirationWatcher.post_ttl);
-                    
-                    var total_hours = Math.floor(time_left / 3600000 );
-                    color = ExpirationWatcher.bar_colors[23 - total_hours];
-                }
-
-                wrap.title = desc;
-                value.style.backgroundColor = color;
-                value.style.width = percent + "%";
-            },
-            
-            getExpirationTimeDescription: function(now, expiration_time)
-            {
-                var time_left = expiration_time - now;
-
-                if (time_left > 0)
-                {
-                    var total_seconds = Math.round(time_left / 1000);
-                    var total_minutes = Math.floor(total_seconds / 60);
-                    var total_hours = Math.floor(total_minutes / 60);
-
-                    var minutes = total_minutes % 60;
-                    var seconds = total_seconds % 60;
-
-                    return "Expires in " + total_hours + " hours, " + minutes + " minutes, and " + seconds + " seconds.";
-                }
-                else
-                {
-                	return "Expired";
-                }
             },
 
             calculateExpirationTime: function(postdate_element)
@@ -112,9 +78,28 @@ settingsLoadedEvent.addHandler(function()
 
                 var post_time = Date.parse(raw_time_string);
                 return post_time + ExpirationWatcher.post_ttl;
-            }
+            },
+			
+			rotateBackground: function(){
+				ExpirationWatcher.bg_x_pos = (ExpirationWatcher.bg_x_pos+1)%25;
+				//*
+				var query = "//div[@class='countdown-value']";
+                var posts =  document.evaluate(query, document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+				var post;
+                for (i = 0; i < posts.snapshotLength; i++)
+                {
+					post = posts.snapshotItem(i);
+					if(post.style.width.indexOf('100')<0)
+						post.style.backgroundPosition = ""+ExpirationWatcher.bg_x_pos+"px 0px !important;";
+				}
+				/*/
+				ExpirationWatcher.rotatestyle.textContent = ".countdown-value { background-position: "+ExpirationWatcher.bg_x_pos+"px 0px };";
+				//*/
+				
+			}
         }
 
         processPostEvent.addHandler(ExpirationWatcher.showExpiration);
+		
     }
 });
