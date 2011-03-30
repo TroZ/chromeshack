@@ -14,8 +14,15 @@ WinChattySearch =
         var liUser = getDescendentByTagAndClassName(document.getElementById('user'), 'li', 'user');
         if (liUser != null)
         {
-            // liUser.innerHTML = '<a href="http://www.shacknews.com/search?q=' + encodeURIComponent(stripHtml(liUser.innerHTML)) + '&type=4">' + liUser.innerHTML + '</a>';
-            liUser.innerHTML = '<a href="http://winchatty.com/search.php?author=&parentAuthor=&category=&terms=' + encodeURIComponent(stripHtml(liUser.innerHTML)) + '" title="WinChatty-powered Vanity Search">' + liUser.innerHTML + '</a>';
+			var name = liUser.innerHTML;
+			var encodeName = encodeURIComponent(stripHtml(liUser.innerHTML));
+            
+			// liUser.innerHTML = '<a href="http://www.shacknews.com/search?q=' + encodeURIComponent(stripHtml(liUser.innerHTML)) + '&type=4">' + liUser.innerHTML + '</a>';
+            //liUser.innerHTML = '<a href="http://winchatty.com/search.php?author=&parentAuthor=&category=&terms=' + encodeURIComponent(stripHtml(liUser.innerHTML)) + '" title="WinChatty-powered Vanity Search">' + liUser.innerHTML + '</a>';
+			
+			liUser.innerHTML += ' | <a target="_blank" href="http://www.shacknews.com/user/'+encodeName+'/posts">Posts</a> ';
+			liUser.innerHTML += ' | <a target="_blank" href="http://www.shacknews.com/search?chatty=1&type=4&chatty_term=&chatty_user=&chatty_author='+encodeName+'&chatty_filter=all">Replies</a> ';
+			liUser.innerHTML += ' | <a target="_blank" href="http://www.shacknews.com/search?chatty=1&type=4&chatty_term='+encodeName+'&chatty_user=&chatty_author=&chatty_filter=all">Mentions</a> ';
         }	
     },
 }
